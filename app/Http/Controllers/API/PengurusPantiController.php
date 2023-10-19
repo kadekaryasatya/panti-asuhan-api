@@ -1,9 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\PengurusPanti;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class PengurusPantiController extends Controller
 {
@@ -12,7 +14,8 @@ class PengurusPantiController extends Controller
      */
     public function index()
     {
-        //
+        $pengurusPantis = PengurusPanti::all();
+        return response()->json($pengurusPantis, 200);
     }
 
     /**
@@ -20,7 +23,7 @@ class PengurusPantiController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -28,15 +31,39 @@ class PengurusPantiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'nama' => 'required',
+            'alamat' => 'required',
+            'tempat_lahir' => 'required',
+            'tanggal_lahir' => 'required',
+            'no_telepon' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $data = new PengurusPanti();
+
+        $data->nama = $request->input('nama');
+        $data->alamat = $request->input('alamat');
+        $data->tempat_lahir = $request->input('tempat_lahir');
+        $data->tanggal_lahir = $request->input('tanggal_lahir');
+        $data->no_telepon = $request->input('no_telepon');
+        $data->isActive = 'aktif';
+        $data->save();
+
+        return response()->json(['message' => 'Data updated successfully']);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(PengurusPanti $pengurusPanti)
+    public function show($id)
     {
-        //
+        $petugasPanti = PengurusPanti::find($id);
+
+        return response()->json([$petugasPanti]);
     }
 
     /**
