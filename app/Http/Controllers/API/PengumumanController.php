@@ -1,65 +1,39 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use App\Models\Pengumuman;
 use Illuminate\Http\Request;
 
 class PengumumanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        return Pengumuman::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        return Pengumuman::findOrFail($id);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        return Pengumuman::create($request->all());
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pengumuman $pengumuman)
+    public function update(Request $request, $id)
     {
-        //
+        $Pengumuman = Pengumuman::findOrFail($id);
+        $Pengumuman->update($request->all());
+        return $Pengumuman;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pengumuman $pengumuman)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pengumuman $pengumuman)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pengumuman $pengumuman)
-    {
-        //
+        $Pengumuman = Pengumuman::findOrFail($id);
+        $Pengumuman->delete();
+        return response()->json(['message' => 'Pengumuman deleted']);
     }
 }
