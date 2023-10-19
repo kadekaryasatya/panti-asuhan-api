@@ -53,7 +53,7 @@ class PengurusPantiController extends Controller
         $data->isActive = 'aktif';
         $data->save();
 
-        return response()->json(['message' => 'Data updated successfully']);
+        return response()->json(['message' => 'Data insert successfully']);
     }
 
     /**
@@ -77,16 +77,52 @@ class PengurusPantiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, PengurusPanti $pengurusPanti)
+    public function update(Request $request, $id)
     {
-        //
+        // Mengambil data sebelumnya
+    $data = PengurusPanti::find($id);
+
+    if (!$data) {
+        return response()->json(['message' => 'Data not found'], 404);
+    }
+
+    // Validasi data baru
+    $validator = Validator::make($request->all(), [
+        'nama' => 'required',
+        'alamat' => 'required',
+        'tempat_lahir' => 'required',
+        'tanggal_lahir' => 'required',
+        'no_telepon' => 'required',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    // Update data dengan data yang telah divalidasi
+    $data->update([
+        'nama' => $request->input('nama'),
+        'alamat' => $request->input('alamat'),
+        'tempat_lahir' => $request->input('tempat_lahir'),
+        'tanggal_lahir' => $request->input('tanggal_lahir'),
+        'no_telepon' => $request->input('no_telepon'),
+        'isActive' => $request->input('is_active'),
+    ]);
+
+    // Gunakan $previousId jika diperlukan
+    // $previousId adalah id dari data sebelumnya
+
+    return response()->json(['message' => 'Data updated successfully']);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(PengurusPanti $pengurusPanti)
+    public function destroy($id)
     {
-        //
+        $petugasPanti = PengurusPanti::find($id);
+        $petugasPanti->delete();
+
+        return response()->json(['message' => 'Data delete successfully']);
     }
 }
