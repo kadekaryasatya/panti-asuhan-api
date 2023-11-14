@@ -2,65 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\Penyakit;
-use App\Http\Requests\StorePenyakitRequest;
-use App\Http\Requests\UpdatePenyakitRequest;
 
 class PenyakitController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $obats = Penyakit::all();
+        return response()->json($obats);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        return response()->json($penyakit);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StorePenyakitRequest $request)
+    public function store(Request $request)
     {
-        //
+        $penyakit = Penyakit::create($request->all());
+        return response()->json($penyakit, 201);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Penyakit $penyakit)
+    public function update(Request $request, $id)
     {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        $penyakit->update($request->all());
+        return response()->json($penyakit, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Penyakit $penyakit)
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatePenyakitRequest $request, Penyakit $penyakit)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Penyakit $penyakit)
-    {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        $penyakit->delete();
+        return response()->json([$penyakit->nama => 'berhasil dihapus'], 200);
     }
 }
