@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\API\AnakAsuhController;
 
 /*
@@ -17,14 +17,18 @@ use App\Http\Controllers\API\AnakAsuhController;
 */
 
 
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');;
+Route::group(['prefix' => 'auth'], function () {
+    
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
 
+    Route::group(['middleware' => 'auth:sanctum'], function() {
+      Route::get('logout', [AuthController::class, 'logout']);
+      Route::get('user', [AuthController::class, 'user']);
+    });
+});
 Route::apiResource('anak-asuh', AnakAsuhController::class);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
 
 
