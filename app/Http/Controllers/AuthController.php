@@ -25,7 +25,12 @@ class AuthController extends Controller
             'password' => 'required',
             'password_confirmation' => 'required|same:password'
         ]);
+        
 
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 422);
+        }
+    
 
         $user = new User([
             'name'  => $request->name,
@@ -64,11 +69,11 @@ class AuthController extends Controller
         ]);
 
         $credentials = request(['email','password']);
-        if(!Auth::attempt($credentials))
-        {
-        return response()->json([
-            'message' => 'Unauthorized'
-        ],401);
+            if(!Auth::attempt($credentials))
+            {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ],401);
         }
 
         $user = $request->user();
