@@ -25,6 +25,7 @@ class StoreProgramPantiRequest extends FormRequest
     {
         return [
             'jenis_program_id' => 'nullable|exists:jenis_programs,id',
+            'judul' => 'required|max:100',
             'jadwal' => 'required|max:50',
             'deskripsi' => 'required',
             'gambar_thumbnail' => 'required|max:255',
