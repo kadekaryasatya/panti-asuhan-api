@@ -17,7 +17,7 @@ class ProgramDonaturController extends Controller
         $programDonaturs = ProgramDonatur::all();
 
         if($programDonaturs->isEmpty()) {
-            return response()->json(["error" => "data tidak ditemukan"], 200);
+            return response()->json(["message" => "data tidak ditemukan"], 200);
         }
 
         return response()->json($programDonaturs, 200);
@@ -32,7 +32,7 @@ class ProgramDonaturController extends Controller
 
         $programDonatur = ProgramDonatur::create($data);
 
-        return response()->json($programDonatur, 201);
+        return response()->json(["data" => $programDonatur, "message" => "Berhasil membuat program donatur"], 201);
     }
 
     /**
@@ -41,10 +41,10 @@ class ProgramDonaturController extends Controller
     public function show(ProgramDonatur $programDonatur): JsonResponse
     {
         if(!$programDonatur) {
-            return response()->json(["error" => "data tidak ditemukan"], 404);
+            return response()->json([$programDonatur => $programDonatur->errors(), "message" => "data tidak ditemukan"], 404);
         }
 
-        return response()->json($programDonatur, 200);
+        return response()->json([$programDonatur], 200);
     }
 
     /**
@@ -56,7 +56,7 @@ class ProgramDonaturController extends Controller
 
         $programDonatur->update($data);
 
-        return response()->json($programDonatur, 200);
+        return response()->json(["data" => $programDonatur, "message" => "Berhasil memperbarui program donatur"], 200);
     }
 
     /**
@@ -66,6 +66,6 @@ class ProgramDonaturController extends Controller
     {
         $programDonatur->delete();
 
-        return response()->json(["success" => "program berhasil dihapus"], 200);
+        return response()->json(["name" => $programDonatur->judul, "message" => "Berhasil menghapus program donatur"], 200);
     }
 }

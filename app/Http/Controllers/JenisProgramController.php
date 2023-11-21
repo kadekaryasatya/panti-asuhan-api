@@ -6,7 +6,6 @@ use App\Models\JenisProgram;
 use App\Http\Requests\StoreJenisProgramRequest;
 use App\Http\Requests\UpdateJenisProgramRequest;
 use Illuminate\Http\JsonResponse;
-use Exception;
 
 class JenisProgramController extends Controller
 {
@@ -18,7 +17,7 @@ class JenisProgramController extends Controller
         $jenisPrograms = JenisProgram::all();
 
         if($jenisPrograms->isEmpty()) {
-            return response()->json(["error" => "data tidak ditemukan"], 200);
+            return response()->json(["message" => "data tidak ditemukan"], 200);
         }
 
         return response()->json($jenisPrograms, 200);
@@ -33,7 +32,7 @@ class JenisProgramController extends Controller
 
         $jenisProgram = JenisProgram::create($data);
 
-        return response()->json($jenisProgram, 201);
+        return response()->json(["data" => $jenisProgram, "message" => "Berhasil membuat jenis program"], 201);
     }
 
     /**
@@ -42,7 +41,7 @@ class JenisProgramController extends Controller
     public function show(JenisProgram $jenisProgram): JsonResponse
     {
         if(!$jenisProgram) {
-            return response()->json(["error" => "data tidak ditemukan"], 404);
+            return response()->json(["message" => "data tidak ditemukan"], 404);
         }
 
         return response()->json($jenisProgram, 200);
@@ -57,7 +56,7 @@ class JenisProgramController extends Controller
 
         $jenisProgram->update($data);
 
-        return response()->json($jenisProgram, 200);
+        return response()->json(["data" => $jenisProgram, "message" => "Berhasil memperbarui jenis program"], 200);
     }
 
     /**
@@ -67,6 +66,6 @@ class JenisProgramController extends Controller
     {
         $jenisProgram->delete();
 
-        return response()->json([$jenisProgram->nama => "berhasil dihapus"], 200);
+        return response()->json(["name" => $jenisProgram->nama,"message" => "Berhasil menghapus jenis program"], 200);
     }
 }

@@ -17,7 +17,7 @@ class ProgramPantiController extends Controller
         $programPantis = ProgramPanti::all();
 
         if($programPantis->isEmpty()) {
-            return response()->json(["error" => "data tidak ditemukan"], 200);
+            return response()->json(["message" => "data tidak ditemukan"], 200);
         }
 
         return response()->json($programPantis, 200);
@@ -32,7 +32,7 @@ class ProgramPantiController extends Controller
 
         $programPanti = ProgramPanti::create($data);
 
-        return response()->json($programPanti, 201);
+        return response()->json(["data" => $programPanti, "message" => "Berhasil membuat program panti"], 201);
     }
 
     /**
@@ -41,7 +41,7 @@ class ProgramPantiController extends Controller
     public function show(ProgramPanti $programPanti): JsonResponse
     {
         if(!$programPanti) {
-            return response()->json(["error" => "data tidak ditemukan"], 404);
+            return response()->json(["message" => "data tidak ditemukan"], 404);
         }
 
         return response()->json($programPanti, 200);
@@ -56,7 +56,7 @@ class ProgramPantiController extends Controller
 
         $programPanti->update($data);
 
-        return response()->json($programPanti, 200);
+        return response()->json(["data" => $programPanti, "message" => "Berhasil memperbarui program panti"], 200);
     }
 
     /**
@@ -66,6 +66,6 @@ class ProgramPantiController extends Controller
     {
         $programPanti->delete();
 
-        return response()->json(["success" => "program berhasil dihapus"], 200);
+        return response()->json(["name" => $programPanti->judul, "message" => "Berhasil menghapus program panti"], 200);
     }
 }

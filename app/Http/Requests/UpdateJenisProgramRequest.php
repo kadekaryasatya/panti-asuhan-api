@@ -39,7 +39,7 @@ class UpdateJenisProgramRequest extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         throw new HttpResponseException(
-            response()->json(['error' => 'terjadi kesalahan dalam validasi'], 422)
+            response()->json(["error" => $validator->errors(), 'message' => 'terjadi kesalahan dalam validasi'], 422)
         );
     }
 }
