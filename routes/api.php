@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\AnakAsuhController;
 use App\Http\Controllers\JenisProgramController;
+use App\Http\Controllers\ProgramDonaturController;
 use App\Http\Controllers\ProgramPantiController;
 
 /*
@@ -30,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('jenis-program', JenisProgramController::class);
 Route::apiResource('program-panti', ProgramPantiController::class);
+Route::apiResource('program-donatur', ProgramDonaturController::class);
 
 
 

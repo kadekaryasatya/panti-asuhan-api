@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('jenis_program_id');
             $table->string('judul');
+            $table->string('jadwal');
             $table->text('deskripsi');
             $table->string('gambar_thumbnail');
 
