@@ -18,7 +18,7 @@ use App\Http\Controllers\API\AnakAsuhController;
 
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');;
+Route::post('/login', [AuthController::class, 'login']);
 
 Route::apiResource('anak-asuh', AnakAsuhController::class);
 
