@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\FotoProgram;
+use App\Models\ObatPenyakit;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class FotoProgramPolicy
+class ObatPenyakitPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class FotoProgramPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, FotoProgram $fotoProgram): bool
+    public function view(User $user, ObatPenyakit $obatPenyakit): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class FotoProgramPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FotoProgram $fotoProgram): bool
+    public function update(User $user, ObatPenyakit $obatPenyakit): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class FotoProgramPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FotoProgram $fotoProgram): bool
+    public function delete(User $user, ObatPenyakit $obatPenyakit): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class FotoProgramPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, FotoProgram $fotoProgram): bool
+    public function restore(User $user, ObatPenyakit $obatPenyakit): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class FotoProgramPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, FotoProgram $fotoProgram): bool
+    public function forceDelete(User $user, ObatPenyakit $obatPenyakit): bool
     {
         //
     }

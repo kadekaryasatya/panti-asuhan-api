@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\FotoProgramDonatur;
+use App\Models\Sekolah;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class FotoProgramDonaturPolicy
+class SekolahPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class FotoProgramDonaturPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, FotoProgramDonatur $fotoProgramDonatur): bool
+    public function view(User $user, Sekolah $sekolah): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class FotoProgramDonaturPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, FotoProgramDonatur $fotoProgramDonatur): bool
+    public function update(User $user, Sekolah $sekolah): bool
     {
         //
     }
@@ -43,7 +43,7 @@ class FotoProgramDonaturPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, FotoProgramDonatur $fotoProgramDonatur): bool
+    public function delete(User $user, Sekolah $sekolah): bool
     {
         //
     }
@@ -51,7 +51,7 @@ class FotoProgramDonaturPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, FotoProgramDonatur $fotoProgramDonatur): bool
+    public function restore(User $user, Sekolah $sekolah): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class FotoProgramDonaturPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, FotoProgramDonatur $fotoProgramDonatur): bool
+    public function forceDelete(User $user, Sekolah $sekolah): bool
     {
         //
     }
